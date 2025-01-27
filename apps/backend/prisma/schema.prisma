@@ -30,5 +30,5 @@ model Note {
   created_at   DateTime
   updated_at   DateTime
   deleted_at   DateTime?
-  user         User      @relation(fields: [user_id], references: [id])
+  user         User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
