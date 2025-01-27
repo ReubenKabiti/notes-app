@@ -9,6 +9,26 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id
+  username String @unique
+  email    String @unique
+  password String @unique
+  notes    Note[]
+}
+
+model Note {
+  id           String    @id
+  title        String
+  body         String
+  creator_name String
+  user_id      String
+  created_at   DateTime
+  updated_at   DateTime
+  deleted_at   DateTime?
+  user         User      @relation(fields: [user_id], references: [id])
 }
