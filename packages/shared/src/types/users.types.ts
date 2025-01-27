@@ -19,6 +19,7 @@ export interface RegisterUser {
 export interface GetUser {
   id?: string;
   email?: string;
+  username?: string;
 }
 
 enum UpdateUserCommands {
@@ -30,4 +31,14 @@ export interface UpdateUser {
   username: string | null;
   email: string | null;
   command: UpdateUserCommands;
+}
+
+export interface LoginUser {
+  username?: string;
+  email?: string;
+  password: string;
+}
+
+export interface Token {
+  token: string;
 }

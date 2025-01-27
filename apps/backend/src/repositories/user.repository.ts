@@ -3,7 +3,7 @@ import { GetUser, User, UserWithPW } from "shared";
 
 export interface UserRepository {
   registerUser: (dto: UserWithPW) => Promise<User>;
-  getUser: (dto: GetUser) => Promise<User>;
+  getUser: (dto: GetUser) => Promise<UserWithPW>;
   updateUser: (dto: UserWithPW) => Promise<User>;
 }
 
@@ -17,11 +17,11 @@ export class PrismaUserRepository implements UserRepository {
     return user;
   }
 
-  public async getUser(dto: GetUser): Promise<User> {
+  public async getUser(dto: GetUser): Promise<UserWithPW> {
     const result = await this.client.user.findFirst({
       where: dto,
     });
-    return result as User;
+    return result as UserWithPW;
   }
 
   public async updateUser(dto: UserWithPW): Promise<User> {

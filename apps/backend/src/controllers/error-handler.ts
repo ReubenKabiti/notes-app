@@ -1,6 +1,15 @@
 import { Prisma } from "@prisma/client";
 import { Response } from "express";
 
+export class GeneralError {
+  public message: string;
+  public code: number;
+  constructor(message: string, code: number) {
+    this.message = message;
+    this.code = code;
+  }
+}
+
 const handleError = (error: any, res: Response) => {
   let code: number = 400;
   let message: string = "";
@@ -15,6 +24,9 @@ const handleError = (error: any, res: Response) => {
         code = 500;
         break;
     }
+  } else if (error instanceof GeneralError) {
+    message = error.message;
+    code = error.code;
   }
 
   res.status(code).json({ message });
