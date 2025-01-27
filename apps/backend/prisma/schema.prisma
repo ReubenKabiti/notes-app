@@ -14,11 +14,14 @@ datasource db {
 }
 
 model User {
-  id       String @id
-  username String @unique
-  email    String @unique
-  password String @unique
-  notes    Note[]
+  id         String    @id
+  username   String    @unique
+  email      String    @unique
+  password   String    @unique
+  notes      Note[]
+  created_at DateTime
+  updated_at DateTime
+  deleted_at DateTime?
 }
 
 model Note {
