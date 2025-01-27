@@ -9,7 +9,7 @@ export interface RegisterUserDto {
   registerUser: RegisterUser;
 }
 
-export default async function registerUser(
+export default async function registerUserUseCase(
   dto: RegisterUserDto
 ): Promise<User> {
   const { repository, registerUser } = dto;
