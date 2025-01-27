@@ -28,7 +28,7 @@ const loginUserUseCase = async (dto: LoginUserDto): Promise<Token> => {
     throw new GeneralError("Wrong password provided!", 400);
 
   try {
-    const token = jwt.sign({ username, email }, JWT_SECRET_KEY);
+    const token = jwt.sign({ id: user.id }, JWT_SECRET_KEY);
     return {
       token,
     };
