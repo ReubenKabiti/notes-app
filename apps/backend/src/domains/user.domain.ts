@@ -1,4 +1,5 @@
 import { Timestamps, UserWithPW } from "shared";
+import { GeneralError } from "../controllers/error-handler";
 
 export class UserDomain {
   private _id: string;
@@ -31,8 +32,13 @@ export class UserDomain {
   }
 
   delete(date: Date) {
-    if (!this._timestamps.deleted_at) throw new Error("User already deleted!");
+    if (!this._timestamps.deleted_at)
+      throw new GeneralError("User already deleted!", 400);
     this._timestamps.deleted_at = date;
+  }
+
+  setUpdatedAt(date: Date) {
+    this._timestamps.updated_at = date;
   }
 
   toJson(): UserWithPW {

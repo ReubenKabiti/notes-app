@@ -5,6 +5,8 @@ import prismaClient from "../repositories/prisma-client";
 import handleError from "./error-handler";
 import loginUserUseCase from "../use-cases/users/login-user.use-case";
 import getUserUseCase from "../use-cases/users/get-user.use-case";
+import auth from "../middleware/auth";
+import deleteUserUseCase from "../use-cases/users/delete-user.use-case";
 
 const usersController = express.Router();
 
@@ -48,6 +50,17 @@ usersController.get("/", async (req, res) => {
       getUser: { id, username, email },
     });
     res.status(200).json(user);
+  } catch (error) {
+    handleError(error, res);
+  }
+});
+
+usersController.delete("/:id", auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const repository = new PrismaUserRepository(prismaClient);
+    const result = await deleteUserUseCase({ repository, id });
+    res.status(200).json(result);
   } catch (error) {
     handleError(error, res);
   }
