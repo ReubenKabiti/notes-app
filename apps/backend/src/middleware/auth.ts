@@ -21,7 +21,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     const verified = jwt.verify(token, JWT_SECRET_KEY);
     if (verified) {
       const userId = (jwt.decode(token) as User).id;
-      // TODO: pass the userId
+      res.locals.userId = userId;
       next();
     } else {
       res.status(401).json({ message: "Unauthorized" });
