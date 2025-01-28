@@ -9,11 +9,11 @@ import auth from "../middleware/auth";
 import deleteUserUseCase from "../use-cases/users/delete-user.use-case";
 
 const usersController = express.Router();
+const repository = new PrismaUserRepository(prismaClient);
 
 usersController.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const repository = new PrismaUserRepository(prismaClient);
     const user = await registerUserUseCase({
       repository,
       registerUser: { username, email, password },
@@ -28,7 +28,6 @@ usersController.post("/register", async (req, res) => {
 usersController.post("/login", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const repository = new PrismaUserRepository(prismaClient);
     const token = await loginUserUseCase({
       repository,
       loginUser: { username, email, password },
@@ -44,7 +43,6 @@ usersController.get("/", async (req, res) => {
     const id = req.query.id as string;
     const username = req.query.username as string;
     const email = req.query.email as string;
-    const repository = new PrismaUserRepository(prismaClient);
     const user = await getUserUseCase({
       repository,
       getUser: { id, username, email },
@@ -58,7 +56,6 @@ usersController.get("/", async (req, res) => {
 usersController.delete("/:id", auth, async (req, res) => {
   try {
     const { id } = req.params;
-    const repository = new PrismaUserRepository(prismaClient);
     const result = await deleteUserUseCase({ repository, id });
     res.status(200).json(result);
   } catch (error) {
