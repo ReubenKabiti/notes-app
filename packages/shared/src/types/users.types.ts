@@ -41,4 +41,5 @@ export interface LoginUser {
 
 export interface Token {
   token: string;
+  user: User;
 }

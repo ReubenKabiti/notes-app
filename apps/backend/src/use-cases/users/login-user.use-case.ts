@@ -27,6 +27,7 @@ const loginUserUseCase = async (dto: LoginUserDto): Promise<Token> => {
     const token = jwt.sign({ id: user.id }, JWT_SECRET_KEY);
     return {
       token,
+      user,
     };
   } catch {
     throw new GeneralError("Failed to login", 403);
