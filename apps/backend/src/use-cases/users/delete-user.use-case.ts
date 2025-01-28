@@ -2,11 +2,7 @@ import { User } from "shared";
 import { UserRepository } from "../../repositories/user.repository";
 import { GeneralError } from "../../controllers/error-handler";
 import { UserDomain } from "../../domains/user.domain";
-
-export interface DeleteUserDto {
-  repository: UserRepository;
-  id: string;
-}
+import DeleteUserDto from "../../dtos/user/delete-user.dto";
 
 const deleteUserUseCase = async (dto: DeleteUserDto): Promise<User> => {
   const { repository, id } = dto;

@@ -3,11 +3,7 @@ import { UserRepository } from "../../repositories/user.repository";
 import bcrypt from "bcrypt";
 import { ulid } from "ulid";
 import { UserDomain } from "../../domains/user.domain";
-
-export interface RegisterUserDto {
-  repository: UserRepository;
-  registerUser: RegisterUser;
-}
+import RegisterUserDto from "../../dtos/user/register-user.dto";
 
 export default async function registerUserUseCase(
   dto: RegisterUserDto

@@ -1,11 +1,7 @@
 import { GetUser, User } from "shared";
 import { UserRepository } from "../../repositories/user.repository";
 import { GeneralError } from "../../controllers/error-handler";
-
-export interface GetUserDto {
-  repository: UserRepository;
-  getUser: GetUser;
-}
+import GetUserDto from "../../dtos/user/get-user.dto";
 
 const getUserUseCase = async (dto: GetUserDto): Promise<User> => {
   const { repository, getUser } = dto;

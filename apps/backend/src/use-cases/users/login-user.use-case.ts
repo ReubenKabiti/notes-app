@@ -4,13 +4,9 @@ import { GeneralError } from "../../controllers/error-handler";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { errors } from "../../util/constants";
+import LoginUserDto from "../../dtos/user/login-user.dto";
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
-
-export interface LoginUserDto {
-  repository: UserRepository;
-  loginUser: LoginUser;
-}
 
 const loginUserUseCase = async (dto: LoginUserDto): Promise<Token> => {
   if (!JWT_SECRET_KEY) throw new GeneralError(errors.internalServerError, 500);
