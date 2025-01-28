@@ -26,15 +26,19 @@ export interface GetNotes {
   user_id?: string;
   start_date?: Date;
   end_date?: Date;
+
+  count?: number;
+  cursor?: string;
 }
 
 export interface NotePage {
   notes: Note[];
   count: number;
-  next_cursor: string;
+  next_cursor?: string;
 }
 
 export interface UpdateNote {
+  id: string;
   title?: string;
   body?: string;
 }
