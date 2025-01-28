@@ -23,6 +23,8 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
       const userId = (jwt.decode(token) as User).id;
       // TODO: pass the userId
       next();
+    } else {
+      res.status(401).json({ message: "Unauthorized" });
     }
   } catch {
     res.status(401).json({ message: "Unauthorized" });
