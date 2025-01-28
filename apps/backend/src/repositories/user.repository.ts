@@ -19,7 +19,7 @@ export class PrismaUserRepository implements UserRepository {
 
   public async getUser(dto: GetUser): Promise<UserWithPW> {
     const result = await this.client.user.findFirst({
-      where: dto,
+      where: { ...dto, deleted_at: null },
     });
     return result as UserWithPW;
   }
